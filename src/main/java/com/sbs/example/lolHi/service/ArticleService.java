@@ -22,4 +22,8 @@ public class ArticleService {
 		return articleDao.getArticleById(id);
 	}
 
+	public void deleteArticleById(int id) {
+		articleDao.deleteArticleById(id);
+	}
+
 }
