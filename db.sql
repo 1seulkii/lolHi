@@ -9,7 +9,7 @@ CREATE TABLE article (
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
     title CHAR(200) NOT NULL,
-    `body` TEXT NOT NULL,
+    `body` TEXT NOT NULL    
 );
 
 #게시물 데이터 생성

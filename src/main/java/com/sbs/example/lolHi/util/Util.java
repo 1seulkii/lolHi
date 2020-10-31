@@ -14,6 +14,7 @@ public class Util {
 		else if (object instanceof Integer) {
 			return (int)object;
 		}
+		
 		return -1;
 	}
 
