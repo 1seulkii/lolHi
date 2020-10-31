@@ -21,15 +21,14 @@ public class ArticleService {
 		// 한 리스트에 나올 수 있는 게시물 게수
 		int itemsCountInAPage = Util.getAsInt(param.get("itemsCountInAPage"), 10);
 		
-		// 
 		if (itemsCountInAPage > 100) {
 			itemsCountInAPage = 100;
-		}else if (itemsCountInAPage < 1) {
+		}
+		else if (itemsCountInAPage < 1) {
 			itemsCountInAPage = 1;
 		}
 		
-		
-		int limitFrom = (page -1) * itemsCountInAPage;
+		int limitFrom = (page - 1) * itemsCountInAPage;
 		int limitTake = itemsCountInAPage;
 		
 		param.put("limitFrom", limitFrom);

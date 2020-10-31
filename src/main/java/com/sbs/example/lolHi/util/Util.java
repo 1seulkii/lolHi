@@ -22,7 +22,7 @@ public class Util {
 			return (int)object;
 		}
 		
-		return -1;
+		return defaultValue;
 	}
 
 }
