@@ -21,4 +21,6 @@ public interface ArticleDao {
 
 	void writeArticle(Map<String, Object> param);
 
+	int getTotalCount();
+
 }
