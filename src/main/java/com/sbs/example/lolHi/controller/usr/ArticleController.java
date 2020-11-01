@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sbs.example.lolHi.dto.Article;
 import com.sbs.example.lolHi.service.ArticleService;
+import com.sbs.example.lolHi.util.Util;
 
 @Controller
 public class ArticleController {
@@ -26,11 +27,27 @@ public class ArticleController {
 		int totalCount = articleService.getTotalCount();
 		int itemsCountInAPage = 10;
 		int totalPage = (int)Math.ceil(totalCount / (double)itemsCountInAPage);
+			// Math.ceil / Math.floor / Math.round, 올림 / 내림 / 반올림
 		
 		param.put("itemsCountInAPage", itemsCountInAPage);
 		
+		int pageMenuArmSize = 5;
+		int page = Util.getAsInt(param.get("page"), 1);
+		int pageMenuStart = page - pageMenuArmSize;
+		if (pageMenuStart < 1) {
+			pageMenuStart = 1;
+		}
+		int pageMenuEnd = page + pageMenuArmSize;
+		if (pageMenuEnd > totalPage) {
+			pageMenuEnd = totalPage;
+		}
+		
 		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("pageMenuArmSize", pageMenuArmSize);
+		model.addAttribute("page", page);
+		model.addAttribute("pageMenuStart", pageMenuStart);
+		model.addAttribute("pageMenuEnd", pageMenuEnd);
 		model.addAttribute("articles", articles);
 
 		return "usr/article/list";
