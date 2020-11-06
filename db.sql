@@ -25,7 +25,7 @@ updateDate = NOW(),
 title = '제목2',
 `body` = '내용2';
 
-#게시물 테이블 생성
+#회원 테이블 생성
 CREATE TABLE `member` (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
