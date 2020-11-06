@@ -1,13 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>회원가입</title>
-</head>
-<body>
-	<h1>회원가입</h1>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!-- head 파일에서 title 가져와 설정하기 -->
+<c:set var="title" value="회원가입" />
+<!-- head 파일 부분을 공통으로 가져와 사용할 수 있어, -->
+<%@ include file="../part/head.jspf" %>
 	<script>
 		var joinFormSubmitDone = false;
 		function joinFormSubmit(form) {
@@ -72,5 +69,4 @@
 		</div>
 	</form>
 
-</body>
-</html>
+<%@ include file="../part/foot.jspf" %>

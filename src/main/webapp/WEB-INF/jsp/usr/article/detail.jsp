@@ -1,15 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>게시물 상세페이지</title>
-</head>
-<body>
-	<h1>게시물 상세페이지</h1>
+<!-- head 파일에서 title 가져와 설정하기 -->
+<c:set var="title" value="게시물 상세페이지" />
+<!-- head 파일 부분을 공통으로 가져와 사용할 수 있어, -->
+<%@ include file="../part/head.jspf" %>
 	
 	<div>아이디: ${article.id}</div>
 	
@@ -24,5 +19,4 @@
 			<a href="modify?id=${article.id}">수정</a>
 	</div>
 
-</body>
-</html>
+<%@ include file="../part/foot.jspf" %>
