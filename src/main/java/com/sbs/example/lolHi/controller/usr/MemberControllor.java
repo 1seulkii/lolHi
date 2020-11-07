@@ -52,6 +52,16 @@ public class MemberControllor {
 				"<script> alert('%s님 환영합니다'); location.replace('/usr/article/list'); </script>", member.getName());
 	}
 	
+	@RequestMapping("/usr/member/doLogout")
+	@ResponseBody
+	public String doLogout(HttpSession session) {
+		
+		session.removeAttribute("loginedMemberId");
+		
+		return String.format(
+				"<script> location.replace('/usr/article/list'); </script>");
+	}
+	
 	@RequestMapping("/usr/member/join")
 	public String showJoin() {
 		return "usr/member/join";
