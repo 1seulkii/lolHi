@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sbs.example.lolHi.dto.Article;
 import com.sbs.example.lolHi.service.ArticleService;
@@ -65,12 +64,12 @@ public class ArticleController {
 	}
 
 	@RequestMapping("/usr/article/doDelete")
-	@ResponseBody
-	public String doDelete(int id) {
+	public String doDelete(int id, Model model) {
 		articleService.deleteArticleById(id);
-
-		return String.format(
-				"<script> alert('%d번 글을 삭제하였습니다.'); location.replace('/usr/article/list') </script>", id);
+		
+		model.addAttribute("msg", String.format("%d번 글을 삭제하였습니다.", id));
+		model.addAttribute("replaceUri", "/usr/article/list");
+		return "common/redirect";
 	}
 
 	@RequestMapping("/usr/article/modify")
@@ -83,32 +82,37 @@ public class ArticleController {
 	}
 
 	@RequestMapping("/usr/article/doModify")
-	@ResponseBody
-	public String doModify(int id, String title, String body) {
+	public String doModify(int id, String title, String body, Model model) {
 		articleService.modifyArticle(id, title, body);
-
-		return String.format(
-				"<script> alert('%d번 글을 수정하였습니다.'); location.replace('/usr/article/detail?id=%d') </script>", id, id);
+		
+		model.addAttribute("msg", String.format("%d번 글을 수정하였습니다.", id));
+		model.addAttribute("replaceUri", String.format("/usr/article/detail?id=%d", id));
+		return "common/redirect";
 	}
 
 	@RequestMapping("/usr/article/write")
-	public String showWrite(HttpSession session) {
+	public String showWrite(HttpSession session, Model model) {
 		int loginedMemberId = 0;
 		
 		if (session.getAttribute("loginedMemberId") != null) {
 			loginedMemberId = (int)session.getAttribute("loginedMemberId");
 		}
+		
+		if (loginedMemberId == 0) {
+			model.addAttribute("msg", "로그인 후 이용해주세요.");
+			model.addAttribute("replaceUri", "/usr/member/login");
+		}
 
-		return "usr/article/write";
+		return "common/redirect";
 	}
 
 	@RequestMapping("/usr/article/doWrite")
-	@ResponseBody
-	public String doWrite(@RequestParam Map<String, Object> param) {
+	public String doWrite(@RequestParam Map<String, Object> param, Model model) {
 		int id = articleService.writeArticle(param);
-
-		return String.format(
-				"<script> alert('%d번 글이 생성되었습니다.'); location.replace('/usr/article/detail?id=%d') </script>", id, id);
+		
+		model.addAttribute("msg", String.format("%d번 글이 생성되었습니다.", id));
+		model.addAttribute("replaceUri", String.format("/usr/article/detail?id=%d", id));
+		return "common/redirect";
 	}
 
 }

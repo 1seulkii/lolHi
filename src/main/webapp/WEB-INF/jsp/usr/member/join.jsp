@@ -14,27 +14,34 @@
 			}
 
 			form.loginId.value = form.loginId.value.trim();
+			
 			if (form.loginId.value.length == 0) {
 				alert('로그인 아이디를 입력해주세요');
 				form.loginId.focus();
 
 				return;
 			}
+			
 			form.loginPw.value = form.loginPw.value.trim();
+			
 			if (form.loginPw.value.length == 0) {
 				alert('로그인 비번을 입력해주세요');
 				form.loginPw.focus();
 
 				return;
 			}
+			
 			form.loginPwConfirm.value = form.loginPwConfirm.value.trim();
+			
 			if (form.loginPw.value != form.loginPwConfirm.value) {
 				alert('비밀번호 확인이 일치하지 않습니다.');
 				form.loginPwConfirm.focus();
 
 				return;
 			}
+			
 			form.name.value = form.name.value.trim();
+			
 			if (form.name.value.length == 0) {
 				alert('사용자 이름을 입력해주세요');
 				form.name.focus();

@@ -6,6 +6,15 @@
 	<select id="getArticles" resultType="Article">
 		SELECT *
 		FROM article
+		ORDER BY id DESC
+		<if test="limitFrom != null and limitTake != null">
+			LIMIT #{limitFrom}, #{limitTake}
+		</if>
+	</select>
+	
+	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(*)
+		FROM article
 	</select>
 	
 	<select id="getArticleById" resultType="Article">
@@ -23,12 +32,8 @@
 		UPDATE article
 		<set>
 			updateDate = NOW(),
-			<if test="title != null">
-			title = #{title},
-			</if>
-			<if test="body != null">
-			`body` = #{body}
-			</if>
+			<if test="title != null"> title = #{title}, </if>
+			<if test="body != null"> `body` = #{body} </if>
 			WHERE id = #{id}
 		</set>
 	</update>
@@ -38,12 +43,8 @@
 		<set>
 			regDate = NOW(),
 			updateDate = NOW(),
-			<if test="title != null">
-			title = #{title},
-			</if>
-			<if test="body != null">
-			`body` = #{body}
-			</if>
+			<if test="title != null"> title = #{title}, </if>
+			<if test="body != null"> `body` = #{body} </if>
 		</set>
 	</insert>
 	
