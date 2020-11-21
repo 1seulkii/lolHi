@@ -64,7 +64,19 @@ public class ArticleController {
 	}
 
 	@RequestMapping("/usr/article/doDelete")
-	public String doDelete(int id, Model model) {
+	public String doDelete(HttpSession session, int id, Model model) {
+		int loginedMemberId = 0;
+		
+		if (session.getAttribute("loginedMemberId") != null) {
+			loginedMemberId = (int) session.getAttribute("loginedMemberId");
+		}
+		
+		if (loginedMemberId == 0) {
+			model.addAttribute("msg", "로그인 후 이용해주세요.");
+			model.addAttribute("replaceUri", "/usr/member/login");
+			return "common/redirect";
+		}
+		
 		articleService.deleteArticleById(id);
 		
 		model.addAttribute("msg", String.format("%d번 글을 삭제하였습니다.", id));
@@ -73,7 +85,19 @@ public class ArticleController {
 	}
 
 	@RequestMapping("/usr/article/modify")
-	public String showModify(Model model, int id) {
+	public String showModify(HttpSession session, Model model, int id) {
+		int loginedMemberId = 0;
+		
+		if (session.getAttribute("loginedMemberId") != null) {
+			loginedMemberId = (int) session.getAttribute("loginedMemberId");
+		}
+		
+		if (loginedMemberId == 0) {
+			model.addAttribute("msg", "로그인 후 이용해주세요.");
+			model.addAttribute("replaceUri", "/usr/member/login");
+			return "common/redirect";
+		}
+		
 		Article article = articleService.getArticleById(id);
 
 		model.addAttribute("article", article);
@@ -82,7 +106,19 @@ public class ArticleController {
 	}
 
 	@RequestMapping("/usr/article/doModify")
-	public String doModify(int id, String title, String body, Model model) {
+	public String doModify(HttpSession session, int id, String title, String body, Model model) {
+		int loginedMemberId = 0;
+		
+		if (session.getAttribute("loginedMemberId") != null) {
+			loginedMemberId = (int) session.getAttribute("loginedMemberId");
+		}
+		
+		if (loginedMemberId == 0) {
+			model.addAttribute("msg", "로그인 후 이용해주세요.");
+			model.addAttribute("replaceUri", "/usr/member/login");
+			return "common/redirect";
+		}
+		
 		articleService.modifyArticle(id, title, body);
 		
 		model.addAttribute("msg", String.format("%d번 글을 수정하였습니다.", id));
@@ -107,7 +143,19 @@ public class ArticleController {
 	}
 
 	@RequestMapping("/usr/article/doWrite")
-	public String doWrite(@RequestParam Map<String, Object> param, Model model) {
+	public String doWrite(HttpSession session, @RequestParam Map<String, Object> param, Model model) {
+		int loginedMemberId = 0;
+		
+		if (session.getAttribute("loginedMemberId") != null) {
+			loginedMemberId = (int) session.getAttribute("loginedMemberId");
+		}
+		
+		if (loginedMemberId == 0) {
+			model.addAttribute("msg", "로그인 후 이용해주세요.");
+			model.addAttribute("replaceUri", "/usr/member/login");
+			return "common/redirect";
+		}
+		
 		int id = articleService.writeArticle(param);
 		
 		model.addAttribute("msg", String.format("%d번 글이 생성되었습니다.", id));
