@@ -11,6 +11,8 @@ import com.sbs.example.lolHi.dto.Member;
 public interface MemberDao {
 	void join(Map<String, Object> param);
 
-	Member getMemberByLoginId(@Param("loginId")String loginId);
+	Member getMemberByLoginId(@Param("loginId") String loginId);
+
+	Member getMemberById(@Param("id") int id);
 
 }
