@@ -68,6 +68,6 @@ loginPw = 'test2',
 ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER updateDate;
 
 # 기존 게시물들의 작성자는 1번 회원으로 정한다.
-UPDATE article SET memberId = 1 WHERE mwmberId = 0;
+UPDATE article SET memberId = 1 WHERE memberId = 0;
 
 SELECT * FROM article;
