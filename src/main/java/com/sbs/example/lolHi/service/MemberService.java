@@ -40,4 +40,8 @@ public class MemberService {
 		return memberDao.getMemberById(Id);
 	}
 
+	public void modify(Map<String, Object> param) {
+		memberDao.modify(param);
+	}
+
 }
