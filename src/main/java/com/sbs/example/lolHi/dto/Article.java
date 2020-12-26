@@ -1,5 +1,7 @@
 package com.sbs.example.lolHi.dto;
 
+import java.util.Map;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,4 +16,6 @@ public class Article {
 	private String title;	
 	private String body;
 	public int memberId;
+	
+	public Map<String, Object> extra;
 }

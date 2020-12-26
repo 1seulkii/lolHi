@@ -15,6 +15,8 @@
 			<br />
 			작성날짜 : ${article.regDate}
 			<br />
+			작성자 : ${article.extra.writer}
+			<br />
 			갱신날짜 : ${article.updateDate}
 			<br />
 			제목 :
