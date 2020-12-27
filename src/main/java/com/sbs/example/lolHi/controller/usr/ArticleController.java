@@ -23,7 +23,7 @@ public class ArticleController {
 	@RequestMapping("/usr/article/list")
 	public String showList(Model model, @RequestParam Map<String, Object> param) {
 
-		List<Article> articles = articleService.getArticles(param);
+		List<Article> articles = articleService.getForPrintArticles(param);
 		
 		int totalCount = articleService.getTotalCount();
 		int itemsCountInAPage = 10;
@@ -122,7 +122,7 @@ public class ArticleController {
 	public String showWrite(HttpServletRequest req, Model model) {
 		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
 		
-		return "common/redirect";
+		return "usr/article/write";
 	}
 
 	@RequestMapping("/usr/article/doWrite")

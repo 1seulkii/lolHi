@@ -6,9 +6,11 @@
 <!-- head 파일 부분을 공통으로 가져와 사용할 수 있어, -->
 <%@ include file="../part/head.jspf" %>
 	
-	<div>아이디: ${article.id}</div>
+	<div>번호: ${article.id}</div>
 	
 	<div>제목: ${article.title}</div>
+	
+	<div>작성자: ${article.extra.writer}</div>
 	
 	<div>내용: ${article.body}</div>
 	
