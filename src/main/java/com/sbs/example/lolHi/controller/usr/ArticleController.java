@@ -22,16 +22,11 @@ public class ArticleController {
 
 	@RequestMapping("/usr/article/list")
 	public String showList(Model model, @RequestParam Map<String, Object> param) {
-
-		List<Article> articles = articleService.getForPrintArticles(param);
 		
-		int totalCount = articleService.getTotalCount();
+		int totalCount = articleService.getTotalCount(param);
 		int itemsCountInAPage = 10;
 		int totalPage = (int)Math.ceil(totalCount / (double)itemsCountInAPage);
-			// Math.ceil / Math.floor / Math.round, 올림 / 내림 / 반올림
-		
-		param.put("itemsCountInAPage", itemsCountInAPage);
-		
+			// Math.ceil / Math.floor / Math.round, 올림 / 내림 / 반올림		
 		int pageMenuArmSize = 5;
 		int page = Util.getAsInt(param.get("page"), 1);
 		int pageMenuStart = page - pageMenuArmSize;
@@ -42,6 +37,9 @@ public class ArticleController {
 		if (pageMenuEnd > totalPage) {
 			pageMenuEnd = totalPage;
 		}
+		
+		param.put("itemsCountInAPage", itemsCountInAPage);
+		List<Article> articles = articleService.getForPrintArticles(param);
 		
 		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("totalPage", totalPage);
