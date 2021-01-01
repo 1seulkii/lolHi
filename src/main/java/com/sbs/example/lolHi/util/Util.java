@@ -11,14 +11,15 @@ public class Util {
 	public static int getAsInt(Object object, int defaultValue) {
 		if (object instanceof BigInteger) {
 			return ((BigInteger)object).intValue();
-		}
-		else if (object instanceof String) {
-			return Integer.parseInt((String) object);
-		}
-		else if (object instanceof Long) {
+		} else if (object instanceof String) {
+			try {
+				return Integer.parseInt((String) object);
+			} catch (NumberFormatException e) {
+				return defaultValue;
+			}
+		} else if (object instanceof Long) {
 			return (int)((long)object);
-		}
-		else if (object instanceof Integer) {
+		} else if (object instanceof Integer) {
 			return (int)object;
 		}
 		
