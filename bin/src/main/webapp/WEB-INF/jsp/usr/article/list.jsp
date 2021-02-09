@@ -7,6 +7,18 @@
 <%@ include file="../part/head.jspf" %>
 
 	<div>총 게시물 수 : ${totalCount}</div>
+	
+	<div>
+		<form>
+			<input type="hidden" name="page" value="1" />
+			<div>
+				<input type="text" name="searchKeyword" placeholder="검색어" value="${param.searchKeyword}">
+			</div>
+			<div>
+				<input type="submit" value="검색">
+			</div>
+		</form>
+	</div>
 
 	<c:forEach items="${articles}" var="article">
 		<div>
@@ -14,6 +26,8 @@
 			<a href="detail?id=${article.id}">${article.id}</a>
 			<br />
 			작성날짜 : ${article.regDate}
+			<br />
+			작성자 : ${article.extra.writer}
 			<br />
 			갱신날짜 : ${article.updateDate}
 			<br />
@@ -49,11 +63,11 @@
 		
 		<!-- 첫 페이지로 이동버튼이 노출될 필요가 있다면 노출 -->
 		<c:if test="${goFirstBtnNeedToShow}">
-		<a href="?page=1">◀</a>
+		<a href="?page=1&searchKeyword=${param.searchKeyword}">◀</a>
 		</c:if>
 		<c:forEach var="i" begin="${pageMenuStart}" end="${pageMenuEnd}">
 			<c:set var="className" value="${i == page ? 'selected' : ''}" />
-			<a class="${className}" href="?page=${i}">${i}</a>
+			<a class="${className}" href="?page=${i}&searchKeyword=${param.searchKeyword}">${i}</a>
 			
 			<!-- 방금 노출된 페이지 번호가 마지막 페이지 번호였다면,
 				아지막으로 이도아는 버튼이 노출될 필요가 없다고 설정 -->
@@ -64,7 +78,7 @@
 
 		<!-- 마지막 페이지로 이동버튼이 노출될 필요가 있다면 노출 -->
 		<c:if test="${goLastBtnNeedToShow}">
-			<a href="?page=${totalPage}">▶</a>
+			<a href="?page=${totalPage}&searchKeyword=${param.searchKeyword}">▶</a>
 		</c:if>
 	</div>
 	

@@ -16,7 +16,7 @@ import com.sbs.example.lolHi.service.MemberService;
 import com.sbs.example.lolHi.util.Util;
 
 @Controller
-public class MemberControllor {
+public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
