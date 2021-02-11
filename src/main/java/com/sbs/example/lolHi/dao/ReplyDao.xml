@@ -13,5 +13,13 @@
 			<if test="body != null"> `body` = #{body}, </if>
 			<if test="memberId != null"> `memberId` = #{memberId} </if>
 		</set>
-	</insert>	
+	</insert>
+	
+	<select id="getForPrintReplies" resultType="Reply">
+		SELECT *
+		FROM reply
+		WHERE relTypeCode = #{relTypeCode}
+		AND relId = #{relId}
+		ORDER BY id DESC
+	</select>
 </mapper>

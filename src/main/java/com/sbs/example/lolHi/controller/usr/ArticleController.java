@@ -12,13 +12,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sbs.example.lolHi.dto.Article;
+import com.sbs.example.lolHi.dto.Reply;
 import com.sbs.example.lolHi.service.ArticleService;
+import com.sbs.example.lolHi.service.ReplyService;
 import com.sbs.example.lolHi.util.Util;
 
 @Controller
 public class ArticleController {
 	@Autowired
 	private ArticleService articleService;
+	@Autowired
+	private ReplyService replyService;
 
 	@RequestMapping("/usr/article/list")
 	public String showList(Model model, @RequestParam Map<String, Object> param) {
@@ -55,8 +59,10 @@ public class ArticleController {
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(Model model, int id) {
 		Article article = articleService.getArticleById(id);
+		List<Reply> replies = replyService.getForPrintReplies("article", id);
 
 		model.addAttribute("article", article);
+		model.addAttribute("replies", replies);
 
 		return "usr/article/detail";
 	}
