@@ -36,4 +36,8 @@ public class ReplyService {
 		
 	}
 
+	public void modify(Map<String, Object> param) {
+		replyDao.modify(param);
+	}
+
 }
